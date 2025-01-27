@@ -5,7 +5,7 @@ pipeline {
 
         stage('approval') {
             steps {
-                timeout(time: 10, unit: 'SECONDS') {
+                timeout(time: 60, unit: 'SECONDS') {
                     input message: 'Do you wish to deploy tp production ?', ok: 'Yes ,I am sure!'
             }
                 }
