@@ -2,6 +2,15 @@ pipeline {
     agent any
 
     stages {
+
+        stage('approval') {
+            steps {
+                timeout(time: 10, unit: 'SECONDS') {
+                    input message: 'Do you wish to deploy tp production ?', ok: 'Yes ,I am sure!'
+            }
+                }
+                
+        }
         stage('hello') {
             agent {
                 docker {
@@ -22,12 +31,6 @@ pipeline {
             }
         }
 
-        stage('approval') {
-            steps {
-                input message: 'Do you wish to deploy tp production ?', ok: 'Yes ,I am sure!'
-            }
-
-        }
         // stage('Test')
         // {
         //     agent {
