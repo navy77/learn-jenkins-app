@@ -22,21 +22,27 @@ pipeline {
             }
         }
 
-        stage('Test')
-        {
-            agent {
-                docker {
-                    image 'node:18-alpine'
-                    reuseNode true
-                }
+        stage('approval') {
+            steps {
+                input message: 'Do you wish to deploy tp production ?', ok: 'Yes ,I am sure!'
             }
-            steps{
-                sh '''
-                    test -f build/index.html
-                    npm test 
-                '''
-            }
+
         }
+        // stage('Test')
+        // {
+        //     agent {
+        //         docker {
+        //             image 'node:18-alpine'
+        //             reuseNode true
+        //         }
+        //     }
+        //     steps{
+        //         sh '''
+        //             test -f build/index.html
+        //             npm test 
+        //         '''
+        //     }
+        // }
     }
 
     post {
